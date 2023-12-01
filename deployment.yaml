@@ -24,3 +24,66 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 80
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service
+spec:
+  selector:
+    matchLabels:
+      app: order-service-pod
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: order-service-pod
+    spec:
+      containers:
+      - name: order-service-container
+        image: abhishek2818/order-service:59
+        resources:
+          requests:
+            memory: "100Mi"
+            cpu: "300m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-service
+spec:
+  selector:
+    matchLabels:
+      app: product-service-pod
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: product-service-pod
+    spec:
+      containers:
+      - name: order-service-container
+        image: abhishek2818/product-service:56
+        resources:
+          requests:
+            memory: "100Mi"
+            cpu: "300m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+
+      
+      
+      
+      
+      
